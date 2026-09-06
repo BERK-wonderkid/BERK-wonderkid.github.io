@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kadir Berk Karakoyun — Portfolyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12211f;
+    --panel: #172725;
+    --panel-line: #24413c;
+    --paper: #ede7da;
+    --paper-dim: #b9c4bd;
+    --amber: #e0a83e;
+    --sage: #6fa98c;
+    --max-w: 720px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--amber); color: var(--ink); }
+
+  a { color: inherit; }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Header ---------- */
+
+  header.hero {
+    padding: 96px 0 72px;
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  .hero .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--sage);
+    margin: 0 0 18px;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.08;
+    margin: 0 0 22px;
+    max-width: 11ch;
+  }
+
+  .hero p {
+    max-width: 46ch;
+    color: var(--paper-dim);
+    font-size: 1.05rem;
+    margin: 0 0 32px;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .hero-links a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--panel-line);
+    padding-bottom: 3px;
+    font-size: 0.95rem;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .hero-links a:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  /* ---------- Section shared ---------- */
+
+  section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  section h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin: 0 0 28px;
+  }
+
+  /* ---------- Hakkımda ---------- */
+
+  .about p {
+    max-width: 58ch;
+    color: var(--paper-dim);
+    margin: 0 0 16px;
+  }
+
+  .about strong { color: var(--paper); font-weight: 500; }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .skills li {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--sage);
+    border: 1px solid var(--panel-line);
+    padding: 5px 12px;
+    border-radius: 3px;
+  }
+
+  /* ---------- Projeler ---------- */
+
+  .project {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid var(--panel-line);
+  }
+
+  .project:first-of-type { border-top: none; }
+
+  .project .date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--paper-dim);
+    padding-top: 3px;
+  }
+
+  .project h3 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .project p {
+    margin: 0 0 12px;
+    color: var(--paper-dim);
+    font-size: 0.95rem;
+  }
+
+  .project a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    color: var(--amber);
+    border-bottom: 1px solid transparent;
+  }
+
+  .project a:hover { border-color: var(--amber); }
+
+  .project.placeholder .date,
+  .project.placeholder h3,
+  .project.placeholder p {
+    color: var(--panel-line);
+  }
+
+  .project.placeholder {
+    border-top: 1px dashed var(--panel-line);
+  }
+
+  /* ---------- İletişim ---------- */
+
+  footer {
+    padding: 56px 0 80px;
+  }
+
+  footer h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin: 0 0 20px;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-list a {
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-flex;
+    gap: 10px;
+    border-bottom: 1px solid transparent;
+    width: fit-content;
+  }
+
+  .contact-list a:hover {
+    color: var(--amber);
+    border-color: var(--amber);
+  }
+
+  .contact-list .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--paper-dim);
+    width: 76px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 520px) {
+    header.hero { padding: 64px 0 48px; }
+    section, footer { padding: 44px 0; }
+    .project { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!--
+  Yeni bir proje bitirdiğinde: aşağıdaki "project placeholder" bloğunu
+  gerçek bilgilerle doldur (tarih, başlık, açıklama, link), altına
+  yeni bir "project placeholder" bloğu daha ekle.
+-->
+
+<header class="hero wrap">
+  <p class="kicker">// merhaba dünya</p>
+  <h1>Kadir Berk Karakoyun</h1>
+  <p>Yazılıma yeni başlıyorum, hevesliyim. Yapay zekayı doğru kullanarak güzel şeyler yapabileceğime ve ileride insanlara yararlı projeler üretebileceğime inanıyorum.</p>
+  <nav class="hero-links">
+    <a href="#hakkimda">Hakkımda</a>
+    <a href="#projeler">Projelerim</a>
+    <a href="#iletisim">İletişim</a>
+  </nav>
+</header>
+
+<section class="about wrap" id="hakkimda">
+  <h2>Hakkımda</h2>
+  <p><strong>Kodlamaya HTML ile başladım</strong>, ilk projem olan Hello World'ü GitHub'a attım. Yapay zekayı doğru kullanarak güzel şeyler yapabileceğime inanıyorum ve ileride insanlara yararlı projeler üretmek istiyorum. Şu an HTML öğreniyorum, Java programlama dilini öğrenmeye de yakında başlayacağım.</p>
+  <ul class="skills">
+    <li>HTML</li>
+    <li>Git &amp; GitHub</li>
+    <li>Java (öğreniyorum)</li>
+  </ul>
+</section>
+
+<section class="projects wrap" id="projeler">
+  <h2>Projelerim</h2>
+
+  <div class="project">
+    <span class="date">2026</span>
+    <div>
+      <h3>Hello World</h3>
+      <p>İlk GitHub reposu — HTML ile yazdığım ilk "merhaba dünya" sayfası.</p>
+      <a href="https://github.com/BERK-wonderkid/HELLO-WORLD" target="_blank" rel="noopener">GitHub'da gör →</a>
+    </div>
+  </div>
+
+  <div class="project placeholder">
+    <span class="date">·····</span>
+    <div>
+      <h3>[Sıradaki proje]</h3>
+      <p>[Kısa açıklama — bu bloğu bir sonraki projeni bitirince gerçek bilgilerle değiştir]</p>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap" id="iletisim">
+  <h2>İletişim</h2>
+  <ul class="contact-list">
+    <li><a href="https://github.com/BERK-wonderkid" target="_blank" rel="noopener"><span class="label">github</span> BERK-wonderkid</a></li>
+    <li><a href="mailto:berkkarakoyun01@gmail.com"><span class="label">e-posta</span> berkkarakoyun01@gmail.com</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
