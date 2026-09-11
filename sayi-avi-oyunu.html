@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sayı Avı — Tahmin Oyunu</title>
+<style>
+  :root {
+    --yesil: #1f5c4b;
+    --yesil-koyu: #14413a;
+    --turuncu: #c97a2b;
+    --zemin: #eef3f0;
+    --kart: #ffffff;
+    --cizgi: #d9e4de;
+    --metin: #1f2a24;
+    --metin-soft: #5c6b63;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(160deg, var(--zemin) 0%, #dfe9e3 100%);
+    color: var(--metin);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  .oyun-kart {
+    position: relative;
+    background: var(--kart);
+    border-radius: 18px;
+    padding: 36px 32px 32px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 12px 28px rgba(20, 65, 58, 0.12);
+    overflow: hidden;
+  }
+
+  .ust-serit {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--yesil), var(--turuncu));
+  }
+
+  .rozet {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .baslik {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--yesil-koyu);
+    margin: 0 0 6px;
+  }
+
+  .aciklama {
+    text-align: center;
+    color: var(--metin-soft);
+    font-size: 0.95rem;
+    margin: 0 0 26px;
+    line-height: 1.5;
+  }
+
+  .aralik-bilgisi {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .aralik-kutu {
+    background: var(--zemin);
+    border: 1px solid var(--cizgi);
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    color: var(--metin-soft);
+    font-weight: 600;
+  }
+
+  .giris-satiri {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  input[type="number"] {
+    flex: 1;
+    padding: 13px 14px;
+    font-size: 1.05rem;
+    border: 2px solid var(--cizgi);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.15s ease;
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"]:focus {
+    border-color: var(--yesil);
+  }
+
+  .tahmin-btn {
+    padding: 13px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--yesil);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+
+  .tahmin-btn:hover { background: var(--yesil-koyu); }
+  .tahmin-btn:active { transform: scale(0.97); }
+
+  .gosterge-satiri {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    min-height: 28px;
+  }
+
+  .mesaj {
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+
+  .mesaj.notr { color: var(--metin-soft); }
+  .mesaj.basari { color: var(--yesil-koyu); }
+  .mesaj.hata { color: #b3462c; }
+
+  .deneme-sayaci {
+    font-size: 0.85rem;
+    color: var(--metin-soft);
+    background: var(--zemin);
+    border-radius: 999px;
+    padding: 4px 12px;
+    white-space: nowrap;
+  }
+
+  .yon-oku {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+    height: 40px;
+    align-items: center;
+  }
+
+  .tekrar-btn {
+    display: none;
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: var(--turuncu);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .tekrar-btn:hover { background: #a8641f; }
+
+  @keyframes suzul {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .canlan { animation: suzul 0.25s ease; }
+</style>
+</head>
+<body>
+
+<div class="oyun-kart">
+  <div class="ust-serit"></div>
+
+  <div class="rozet">
+    <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="28" cy="28" r="26" fill="none" stroke="#1f5c4b" stroke-width="2.5" stroke-dasharray="4 5"/>
+      <path d="M18 32 L24 38 L38 20" fill="none" stroke="#c97a2b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <h1 class="baslik">Sayı Avı</h1>
+  <p class="aciklama">Aklımda tuttuğum sayıyı bulmaya çalış. Her tahminden sonra sana yön göstereceğim.</p>
+
+  <div class="aralik-bilgisi">
+    <span class="aralik-kutu" id="altSinir">Alt sınır: 1</span>
+    <span class="aralik-kutu" id="ustSinir">Üst sınır: 100</span>
+  </div>
+
+  <div class="giris-satiri">
+    <input type="number" id="tahminGirisi" placeholder="Bir sayı yaz" aria-label="Tahminin">
+    <button class="tahmin-btn" id="tahminBtn">Dene</button>
+  </div>
+
+  <div class="gosterge-satiri">
+    <span class="mesaj notr" id="mesajAlani">Sana bir sayı söylüyorum, kalanı sen bul.</span>
+    <span class="deneme-sayaci" id="denemeSayaci">0 deneme</span>
+  </div>
+
+  <div class="yon-oku" id="yonAlani"></div>
+
+  <button class="tekrar-btn" id="tekrarBtn">Yeni Oyun Başlat</button>
+</div>
+
+<script>
+(function () {
+  const ALT_SINIR = 1;
+  const UST_SINIR = 100;
+
+  let gizliSayi = rastgeleSayiUret();
+  let denemeSayisi = 0;
+  let oyunAktif = true;
+  let mevcutAlt = ALT_SINIR;
+  let mevcutUst = UST_SINIR;
+
+  const girisAlani = document.getElementById("tahminGirisi");
+  const tahminBtn = document.getElementById("tahminBtn");
+  const mesajAlani = document.getElementById("mesajAlani");
+  const denemeSayaci = document.getElementById("denemeSayaci");
+  const yonAlani = document.getElementById("yonAlani");
+  const tekrarBtn = document.getElementById("tekrarBtn");
+  const altSinirEtiketi = document.getElementById("altSinir");
+  const ustSinirEtiketi = document.getElementById("ustSinir");
+
+  function rastgeleSayiUret() {
+    return Math.floor(Math.random() * (UST_SINIR - ALT_SINIR + 1)) + ALT_SINIR;
+  }
+
+  function okuCiz(yon) {
+    // yon: "yukari" | "asagi" | "dogru"
+    let renk = "#5c6b63";
+    let yol = "";
+
+    if (yon === "yukari") {
+      renk = "#c97a2b";
+      yol = "M28 34 L28 14 M18 22 L28 12 L38 22";
+    } else if (yon === "asagi") {
+      renk = "#c97a2b";
+      yol = "M28 14 L28 34 M18 26 L28 36 L38 26";
+    } else {
+      renk = "#1f5c4b";
+      yol = "M14 28 L23 37 L42 16";
+    }
+
+    yonAlani.innerHTML =
+      '<svg width="56" height="40" viewBox="0 0 56 48" xmlns="http://www.w3.org/2000/svg" class="canlan" aria-hidden="true">' +
+      '<path d="' + yol + '" fill="none" stroke="' + renk + '" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '</svg>';
+  }
+
+  function mesajGoster(metin, tur) {
+    mesajAlani.textContent = metin;
+    mesajAlani.className = "mesaj " + tur;
+    mesajAlani.classList.remove("canlan");
+    void mesajAlani.offsetWidth;
+    mesajAlani.classList.add("canlan");
+  }
+
+  function tahminIsle() {
+    if (!oyunAktif) return;
+
+    const deger = girisAlani.value.trim();
+    const tahmin = Number(deger);
+
+    if (deger === "" || Number.isNaN(tahmin)) {
+      mesajGoster("Lütfen bir sayı gir.", "hata");
+      return;
+    }
+
+    if (tahmin < mevcutAlt || tahmin > mevcutUst) {
+      mesajGoster(mevcutAlt + " ile " + mevcutUst + " arasında bir sayı dene.", "hata");
+      return;
+    }
+
+    denemeSayisi++;
+    denemeSayaci.textContent = denemeSayisi + " deneme";
+
+    if (tahmin === gizliSayi) {
+      mesajGoster("Buldun! Sayı " + gizliSayi + " idi.", "basari");
+      okuCiz("dogru");
+      oyunuBitir();
+    } else if (tahmin < gizliSayi) {
+      mevcutAlt = Math.max(mevcutAlt, tahmin + 1);
+      altSinirEtiketi.textContent = "Alt sınır: " + mevcutAlt;
+      mesajGoster("Daha büyük bir sayı dene.", "notr");
+      okuCiz("yukari");
+    } else {
+      mevcutUst = Math.min(mevcutUst, tahmin - 1);
+      ustSinirEtiketi.textContent = "Üst sınır: " + mevcutUst;
+      mesajGoster("Daha küçük bir sayı dene.", "notr");
+      okuCiz("asagi");
+    }
+
+    girisAlani.value = "";
+    girisAlani.focus();
+  }
+
+  function oyunuBitir() {
+    oyunAktif = false;
+    girisAlani.disabled = true;
+    tahminBtn.disabled = true;
+    tekrarBtn.style.display = "block";
+  }
+
+  function yenidenBasla() {
+    gizliSayi = rastgeleSayiUret();
+    denemeSayisi = 0;
+    oyunAktif = true;
+    mevcutAlt = ALT_SINIR;
+    mevcutUst = UST_SINIR;
+
+    altSinirEtiketi.textContent = "Alt sınır: " + ALT_SINIR;
+    ustSinirEtiketi.textContent = "Üst sınır: " + UST_SINIR;
+    denemeSayaci.textContent = "0 deneme";
+    mesajGoster("Sana bir sayı söylüyorum, kalanı sen bul.", "notr");
+    yonAlani.innerHTML = "";
+
+    girisAlani.disabled = false;
+    tahminBtn.disabled = false;
+    girisAlani.value = "";
+    tekrarBtn.style.display = "none";
+    girisAlani.focus();
+  }
+
+  tahminBtn.addEventListener("click", tahminIsle);
+  girisAlani.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") tahminIsle();
+  });
+  tekrarBtn.addEventListener("click", yenidenBasla);
+})();
+</script>
+
+</body>
+</html>
