@@ -1,0 +1,517 @@
+/* =========================================================
+   Kadir Berk Karakoyun — Portfolyo Stil Dosyası
+   Sıfırdan yazılmıştır. Harici framework / kütüphane yoktur.
+   Tema: "Defterden filizlenen fidan" — büyüme / öğrenme yolculuğu
+   ========================================================= */
+
+:root {
+  /* -- Açık tema renk paleti -- */
+  --paper: #faf7f0;
+  --paper-raised: #ffffff;
+  --ink: #20241f;
+  --ink-soft: #4b5147;
+  --moss: #2f5d3a;
+  --moss-strong: #234a2c;
+  --moss-tint: #e7efe3;
+  --gold: #a8722f;
+  --gold-tint: #f3e7d4;
+  --line: #ddd6c4;
+  --focus: #1c5fd6;
+
+  /* -- Tipografi -- */
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* -- Ölçü -- */
+  --content-width: 680px;
+  --wide-width: 880px;
+  --radius: 3px;
+  --transition: 160ms ease;
+}
+
+[data-theme="dark"] {
+  --paper: #14170f;
+  --paper-raised: #1b1f17;
+  --ink: #ece7d9;
+  --ink-soft: #b8b2a0;
+  --moss: #7db888;
+  --moss-strong: #9ccca5;
+  --moss-tint: #1e2a1f;
+  --gold: #d9a75c;
+  --gold-tint: #2a2114;
+  --line: #2c3125;
+  --focus: #6fa1ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--moss-strong);
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* ---------- Üst bilgi ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 10;
+}
+
+.header-inner {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.1rem;
+  align-items: center;
+}
+
+.main-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.93rem;
+  padding: 0.3rem 0.1rem;
+  border-bottom: 2px solid transparent;
+}
+
+.main-nav a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--moss);
+}
+
+.theme-toggle {
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.theme-toggle:hover {
+  border-color: var(--moss);
+}
+
+/* ---------- Genel bölüm düzeni ---------- */
+
+main {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+section {
+  padding: 3.2rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--moss-strong);
+  margin: 0 0 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 0 0 1.1rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin: 0 0 0.4rem;
+}
+
+p {
+  margin: 0 0 1rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  padding-top: 3.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--moss-strong);
+  margin-bottom: 0.8rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem;
+  max-width: 14ch;
+}
+
+.hero-lede {
+  font-size: 1.1rem;
+  max-width: 46ch;
+  margin-bottom: 1.8rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: transform var(--transition), background var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--moss);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--moss-strong);
+}
+
+.btn-secondary {
+  border-color: var(--line);
+  color: var(--ink);
+  background: var(--paper-raised);
+}
+
+.btn-secondary:hover {
+  border-color: var(--moss);
+}
+
+/* ---------- Büyüme çizelgesi (growth timeline) ---------- */
+
+.growth-timeline {
+  list-style: none;
+  margin: 0 0 2.2rem;
+  padding: 0;
+  border-left: 2px solid var(--line);
+}
+
+.growth-timeline li {
+  position: relative;
+  padding: 0 0 1.6rem 1.5rem;
+}
+
+.growth-timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.growth-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -6.5px;
+  top: 0.3rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--moss);
+}
+
+.growth-timeline li[data-status="active"]::before {
+  background: var(--moss);
+}
+
+.growth-timeline .stage-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--moss-strong);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.growth-timeline h3 {
+  margin-bottom: 0.25rem;
+}
+
+/* ---------- Beceri listesi + ilerleme çubukları ---------- */
+
+.skills-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.skill-row {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.skill-name {
+  font-size: 0.94rem;
+}
+
+.skill-track {
+  height: 7px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: var(--moss);
+  border-radius: 999px;
+}
+
+.skill-pct {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  min-width: 2.4rem;
+  text-align: right;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  border: 1px solid var(--line);
+  padding: 0.28rem 0.6rem;
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  background: var(--paper-raised);
+}
+
+/* ---------- Diller ---------- */
+
+.lang-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.lang-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.lang-level {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--moss-strong);
+}
+
+/* ---------- Proje kartları ---------- */
+
+.project-list {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.project-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.4rem;
+  background: var(--paper-raised);
+}
+
+.project-card .project-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.project-card p {
+  margin-bottom: 0.8rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+/* ---------- GitHub istatistikleri (canlı) ---------- */
+
+.gh-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 1.4rem 0;
+}
+
+.gh-stat {
+  background: var(--paper-raised);
+  padding: 1rem 1.1rem;
+  text-align: left;
+}
+
+.gh-stat .num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.gh-stat .label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.gh-note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ---------- Değişiklik günlüğü ---------- */
+
+.changelog {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.changelog li {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+
+.changelog li:last-child {
+  border-bottom: none;
+}
+
+.changelog time {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* ---------- Alt bilgi ---------- */
+
+footer {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+footer a {
+  color: var(--ink-soft);
+}
+
+/* ---------- Duyarlı tasarım ---------- */
+
+@media (max-width: 640px) {
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .skill-row {
+    grid-template-columns: 6.5rem 1fr auto;
+  }
+  .changelog li {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}
